@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <title>Phonebook</title>
+</head>
+
+<body>
+
+    <div class="wrapper">
+
+            <h2>Phonebook</h2>
+
+        <div id="app">
+
+            <div class="app-header">
+                <button @click="startAdding()" v-if="!adding">New User</button>
+                <div v-if="adding">
+                    <div> <input type="text" placeholder="Full Name" v-model="newUserName"> </div>
+                    <div> <input type="text" placeholder="Phone" v-model="newUserPhone"> </div>
+                    <button @click="addUser()">Add</button>
+                    <button @click="abortAdding()">Cancel</button>
+                </div>
+            </div>
+            <div v-for="(user, idx) in users" class="user">
+                {{ user.name }} - {{ user.phone }}
+                <button @click="removeUser(idx)"> - </button>
+            </div>
+
+
+
+
+            
+        </div>
+
+    </div>
+
+
+    <script>
+
+        var mainVue = new Vue({
+            el: "#app",
+            data: function () {
+                return {
+                    users: [
+                        { name: "John Doe", phone: 011223344 },
+                        { name: "Jane Doe", phone: 011225544 }
+                    ],
+                    newUserName: "",
+                    newUserPhone: "",
+                    adding: false,
+                }
+            },
+
+
+            methods: {
+                removeUser(place) {
+                    this.users.splice(place, 1);
+                    this.saveToLocalStorage();
+
+
+                },
+
+                addUser() {
+                    this.users.push({
+                        phone: parseInt(this.newUserPhone),
+                        name: this.newUserName
+                    })
+                    this.adding = false;
+                    this.newUserPhone = "";
+                    this.newUserName = "";
+                    this.saveToLocalStorage();
+
+                },
+                startAdding() {
+                    this.adding = true;
+                },
+
+                abortAdding() {
+                    this.adding = false;
+                    this.newUserName = "";
+                    this.newUserPhone = "";
+                },
+
+                saveToLocalStorage() { 
+                    localStorage.setItem('phonebook-data', JSON.stringify(this.users));
+                },
+
+                loadFromLocalStorage() { 
+                    var json = localStorage.getItem('phonebook-data');
+
+                    if (json === null)
+                        return [];
+
+                    let jsonParsed = JSON.parse(json);
+
+
+                    if (jsonParsed.length === 0)
+                        return [];
+
+
+
+                    for (let i = 0; i < jsonParsed.length; i++) {
+                        this.users.push(jsonParsed[i]);
+                    }
+
+
+
+                }
+
+
+            }
+
+
+        })
+
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,73 @@
+body {
+    margin: 0px auto;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper {
+    margin: 0px auto;
+    max-width: 400px;
+    text-align: center;
+    background-color: rgb(41, 32, 32);
+    color: blanchedalmond;
+    height: 100vh;
+}
+h2 {
+    margin: 0;
+    padding: 1em;
+}
+
+button {
+    margin: 5px;
+    background: rgb(212, 33, 33);
+    color: #fff;
+    padding: 5px;
+    border-radius: 10px;
+    border: 2px solid rgb(78, 3, 66);
+
+    &:hover {
+        background: rgb(78, 3, 66);
+        cursor: pointer;
+        border: 2px solid rgb(206, 15, 174);
+        transition: all ease 1s;
+    }
+}
+
+input {
+    margin: 5px;
+    border-radius: 3px;
+    background-color: rgb(48, 2, 40);
+    color: blanchedalmond;
+
+    &:focus {
+        border: 2px solid rgb(206, 15, 174);
+    }
+}
+
+::placeholder {
+    color: rgb(212, 33, 33);
+}
+
+.user {
+    background-color: rgb(53, 26, 26);
+    border-radius: 25px;
+    margin: 5px 20px;
+    transition: all ease 1s;
+    border: 2px solid rgb(104, 32, 6);
+
+    &:hover {
+        background-color: rgb(48, 2, 40);
+        border: 2px solid rgb(252, 231, 252);
+    }
+}
+
+#app {
+    background-color: rgb(41, 32, 32);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-content: space-between;
+
+    .app-header {
+        background-color: rgb(59, 50, 50);
+    }
+}
